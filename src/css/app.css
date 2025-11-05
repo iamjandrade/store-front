@@ -1,0 +1,119 @@
+/* app global css */
+
+/* Load Inter from Google Fonts and set it as the default font for the app */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+:root 
+{
+  /* Quasar uses --q-font-family in some places; provide a global CSS variable */
+  --q-font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+}
+
+html, body, #q-app 
+{
+  font-family: var(--q-font-family);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+*
+{
+  word-break: break-word;
+}
+
+.q-card, .q-menu
+{
+  /* Slightly thicker, subtle border to make surfaces more defined */
+  border: 1.5px solid rgba(0, 0, 0, 0.08);
+  /* Slightly stronger, but still subtle, double-layer shadow for more depth */
+  box-shadow: var(--q-card-box-shadow, 0 1px 2px rgba(0, 0, 0, 0.06), 0 6px 18px rgba(0, 0, 0, 0.06));
+  transition: box-shadow .12s ease, border-color .12s ease;
+  /* More rounded corners for a modern look */
+  border-radius: 5px;
+  overflow: hidden;
+  background-clip: padding-box; /* ensure border radius clips background */
+}
+
+.card-left-border 
+{
+  border-left: 6px solid var(--q-secondary);
+}
+
+
+.q-card--dark, .q-menu--dark
+{
+  /* Slightly thicker, subtle border to make surfaces more defined */
+  border: 1.5px solid rgba(255, 255, 255, 0.08);
+  /* Slightly stronger, but still subtle, double-layer shadow for more depth */
+  box-shadow: var(--q-card-box-shadow, 0 1px 2px rgba(255, 255, 255, 0.08), 0 6px 18px rgba(255, 255, 255, 0.08));
+  transition: box-shadow .12s ease, border-color .12s ease;
+  /* More rounded corners for a modern look */
+  border-radius: 5px;
+  overflow: hidden;
+  background-clip: padding-box; /* ensure border radius clips background */
+
+}
+
+/* Reduce vertical spacing between the label and caption in the header */
+.module-header p
+{
+  margin-top: 0.15rem; /* small top margin to keep some breathing room */
+  margin-bottom: 0.15rem; /* tighten bottom margin so paragraphs sit closer */
+}
+
+.icon-section 
+{
+  min-width: 24px; /* smaller avatar slot width */
+  padding-right: 10px; /* small gap between icon and text */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Fix: q-input dark mode — make focus/hover/highlight white */
+/* Ensures underline, label, placeholder, caret and hover/focus states are visible on dark backgrounds */
+.q-field--dark,
+.q-input--dark 
+{
+  /* normalize text color inside dark fields */
+  color: #fff;
+}
+
+.q-field--dark .q-field__control,
+.q-input--dark .q-field__control,
+.q-field--dark .q-input__control,
+.q-input--dark .q-input__control {
+  border-color: rgba(255,255,255,0.12); /* subtle border */
+  color: #fff;
+  caret-color: #fff;
+}
+
+/* Focused / hovered state: bright white highlight */
+.q-field--dark.q-field--focused .q-field__control,
+.q-field--dark .q-field__control:hover,
+.q-input--dark.q-field--focused .q-field__control,
+.q-input--dark .q-field__control:hover 
+{
+  border-color: #fff !important;
+  box-shadow: 0 0 0 1px rgba(255,255,255,0.06) inset;
+}
+
+.q-field--dark .q-field__label,
+.q-input--dark .q-field__label 
+{
+  color: rgba(255,255,255,0.9);
+}
+
+.q-field--dark .q-field__control::placeholder,
+.q-input--dark .q-field__control::placeholder 
+{
+  color: rgba(255,255,255,0.5);
+}
+
+/* Selected text highlight (when user selects text inside input) */
+.q-field--dark ::selection,
+.q-input--dark ::selection 
+{
+  background: rgba(255,255,255,0.12);
+  color: #fff;
+}
