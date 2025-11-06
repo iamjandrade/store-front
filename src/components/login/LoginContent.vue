@@ -72,36 +72,6 @@ export default
     Login() 
     {
       this.form.loading = true 
-      /*
-      this.$api.post('/login',this.loginForm).then((response) => 
-      {
-        if(response.data.success)
-        {
-          Notify.create({type:'positive',position:'bottom-right',message:response.data.msg})
-
-          const store = useMainStore()
-          store.Token = response.data.data.token.access_token
-          store.RefreshToken = response.data.data.token.refresh_token
-          store.User = response.data.data.user
-          store.setCurrentTeam()
-          store.setRole()
-          store.Authenticated = true
-          this.$router.push('/dashboard')
-        }
-
-        if(!response.data.success)
-        {
-          Notify.create({type:'negative',position:'bottom-right',message:response.data.msg})
-          this.form.loading = false
-        }
-      })
-      .catch((e) => 
-      {
-        Notify.create({type:'negative',position:'bottom-right',message:this.$t('error')})
-        this.form.loading = false
-      })
-        */
-
       const store = useMainStore()
       store.User = this.loginForm.email
       store.Name = this.loginForm.name

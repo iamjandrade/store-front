@@ -28,25 +28,6 @@
             </q-item-section>
           </q-item>
           <q-separator inset />
-          <q-item dense clickable v-close-popup>
-            <q-item-section avatar class="q-ma-none icon-section">
-              <q-icon size="xs" outlined name="person" />
-            </q-item-section>
-            <q-item-section>Account</q-item-section>
-          </q-item>
-          <q-item dense clickable v-close-popup>
-            <q-item-section avatar class="q-ma-none icon-section" >
-              <q-icon size="xs" outlined name="credit_card" />
-            </q-item-section>
-            <q-item-section>Billing</q-item-section>
-          </q-item>
-          <q-item dense clickable v-close-popup>
-            <q-item-section avatar class="q-ma-none icon-section">
-              <q-icon size="xs" outlined name="notifications"/>
-            </q-item-section>
-            <q-item-section>Notifications</q-item-section>
-          </q-item>
-          <q-separator  inset />
           <q-item  clickable @click="Logout()">
             <q-item-section avatar class="q-ma-none icon-section">
               <q-icon size="xs" outlined name="logout" />
@@ -87,28 +68,11 @@ export default
   {
     Logout()
     {
-      this.$api.get('/logout').then((response) => 
-      {
-        if(response.data.success)
-        {
-          this.$q.notify({type:'positive',position:'bottom-right',message:response.data.msg})
-          this.$q.localStorage.clear()
-          this.$router.go(0)
-        }
-
-        if(!response.data.success)
-        {
-          this.$q.notify({type:'negative',position:'bottom-right',message:response.data.msg})
-          this.$q.localStorage.clear()
-          this.$router.go(0)
-        }
-      })
-      .catch((e) => 
-      {
-        this.$q.notify({type:'negative',position:'bottom-right',message:this.$t('error')})
-        this.$q.localStorage.clear()
-        this.$router.go(0)
-      })
+      const store = useMainStore()
+      store.User = ''
+      store.Name = ''
+      store.Authenticated = false
+      this.$router.push('/')
     }
   },
   mounted()
