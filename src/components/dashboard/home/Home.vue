@@ -1,5 +1,6 @@
 <template>
   <div>
+
     <div class="row q-gutter-sm">
       <div
         v-for="product in products"
@@ -25,7 +26,7 @@
     <q-btn outline  icon="shopping_cart" color="primary" label="ver carrito" size="md" @click="getCart()" />
   </q-page-sticky>
 
-  <q-dialog position="right" full-height v-model="modal" transition-show="slide-left" transition-hide="slide-right" :maximized="$q.screen.lt.md">
+  <q-dialog  position="right" full-height v-model="modal" transition-show="slide-left" transition-hide="slide-right" :maximized="$q.screen.lt.md">
     <q-card>
       <q-bar class="q-pa-lg text-body text-bold" :class="$q.dark.isActive ? 'bg-dark' : 'bg-white'">
         <q-icon class="text-bold" name="add" />
@@ -36,6 +37,7 @@
         </q-btn>
       </q-bar>
       <q-separator inset />
+      <div v-if="cart.completed_at == null">
       <q-card-section> 
         <div v-if="cart.items.length !== 0">
           <div class="row q-gutter-sm">
@@ -64,6 +66,20 @@
       <div class="q-pa-md text-right">
          <q-btn  icon="shopping_cart_checkout" class="full-width" color="positive" label="Pagar" size="md" @click="checkout()" />
       </div>
+      </div>
+      <div v-if="cart.completed_at != null">
+        <q-separator inset />
+        <q-card-section>
+          <div class="text-subtitle1">Información de la compra</div>
+          <div class="text-caption">ID de la compra: {{ checkoutInfo.id }}</div>
+          <div class="text-caption">Total pagado: {{ Currency(checkoutInfo.subtotal, 'USD') }}</div>
+          <div class="text-caption">Fecha: {{ checkoutInfo.created_at }}</div>
+          <div class="text-center q-pa-md">
+          <q-icon name="check_circle" color="positive" size="6.0em" />
+           <div class="text bodey text-center">Gracias por su compra!.</div>
+          </div>
+        </q-card-section>
+      </div>
     </q-card>
   </q-dialog>
 </template>
@@ -86,6 +102,7 @@ export default
     products: [],
     modal: false,
     cart: [],
+    checkoutInfo: [],
   }),  
   methods:
   {
@@ -97,7 +114,6 @@ export default
       {
         if(response.data.length != 0)
         {
-          console.log(response.data.data)
           this.products = response.data.data
 
         }
@@ -122,7 +138,7 @@ export default
    
       this.$api.post('/cart/items',post).then((response) => 
       {
-         console.log('Se agrego al carrito.')
+         this.$q.notify({type:'positive',position:'bottom-right',message:'Producto agregado al carrito.'})
       })
       .catch((e) => 
       {
@@ -195,7 +211,9 @@ export default
       this.$api.post('/cart/complete').then((response) => 
       {
          this.$q.notify({type:'positive',position:'bottom-right',message:'Compra realizada con éxito.'})
-         this.modal = false
+         this.checkoutInfo = response.data.data
+         this.cart.completed_at = this.checkoutInfo.completed_at
+       
       })
       .catch((e) => 
       {
