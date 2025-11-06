@@ -40,7 +40,7 @@
         <q-item color="secondary" clickable class="q-pa-sm" aria-label="Sidebar header">
           <q-item-section avatar class="icon-section">
             <q-avatar rounded  size="md" :class="$q.dark.isActive ? 'bg-white text-primary' : 'bg-primary text-white'">
-              <q-icon name="fa-solid fa-dashboard fa-shake" />
+              <q-icon name="shop" />
             </q-avatar>
           </q-item-section>
           <q-item-section>

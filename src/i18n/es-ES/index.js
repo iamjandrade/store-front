@@ -17,14 +17,6 @@ export default
   },
   app: 'Tienda Online',
   brand: '© 2025 Tienda Online™',
-  reserved: 'Todos los derechos reservados.',
-  policy: 'Política de Privacidad',
-  LanguageSwitcher:
-  {
-    label: 'Idioma',
-    spanish: 'Español',
-    english: 'Ingles',
-  },
   LoginContent:
   {
     title: 'Iniciar sesión en',
@@ -32,16 +24,12 @@ export default
     form:
     {
       email: 'Correo electrónico *',
-      password: 'Contraseña *',
+      name: 'Nombre',
       submit: 'Iniciar sesión'
     },
-    register: '¿No tienes cuenta?',
-    reset: '¿Olvido su contraseña?'
   },
   MainLayout: 
   {
-    plans: ['Plan Gratuito','Plan Basico','Plan Pro'],
-    trial: 'Días',
     menu:
     {
       home: 

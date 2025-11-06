@@ -46,9 +46,12 @@
             >
               <q-card flat class="q-pa-sm">
                 <q-card-section class="q-pt-xs q-pb-xs">
+                  <q-btn dense flat round icon="delete" color="red" class=" cursor-pointer absolute-top-right" @click="removeItem(item.id)"/>
                   <div class="text-subtitle1">{{ item.product.name }}</div>
                   <div class="text-caption">Precio:   {{Currency(item.product.price,'USD')}}</div>
                   <div class="text-caption">Cantidad:   {{ item.quantity }}</div>
+                  <q-btn outline dense color="green" label="Agregar otro" @click="addToCart(item.product)" />
+                  
                 </q-card-section>
               </q-card>
             </div>
@@ -149,6 +152,24 @@ export default
         this.$q.loading.hide()
       })
     },
+    removeItem(itemId)
+    {
+      console.log('Eliminando item: '+itemId)
+      this.$q.loading.show()
+      this.$api.delete('/cart/items/'+itemId).then((response) => 
+      {
+         this.$q.notify({type:'positive',position:'bottom-right',message:'Producto eliminado del carrito.'})
+         this.getCart()
+      })
+      .catch((e) => 
+      {
+        this.$q.notify({type:'negative',position:'bottom-right',message:this.$t('error')})
+      })
+      .finally(() => 
+      {
+        this.$q.loading.hide()
+      })
+    },
     checkout()
     {
       this.$q.loading.show()
@@ -165,7 +186,6 @@ export default
       {
         this.$q.loading.hide()
       })
-
     }
   },
   mounted() 

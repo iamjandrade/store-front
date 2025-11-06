@@ -58,7 +58,7 @@ export default
   ({
     loginForm:
     {
-      email: '',
+      email: 'test@example.com',
       name: '',
     },
     form: 
